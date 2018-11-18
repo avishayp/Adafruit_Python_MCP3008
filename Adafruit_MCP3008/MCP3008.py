@@ -26,7 +26,7 @@ class MCP3008(object):
     """Class to represent an Adafruit MCP3008 analog to digital converter.
     """
 
-    def __init__(self, clk=None, cs=None, miso=None, mosi=None, spi=None, gpio=None):
+    def __init__(self, clk=None, cs=None, miso=None, mosi=None, spi=None, gpio=None, speed_hz=1000000):
         """Initialize MAX31855 device with software SPI on the specified CLK,
         CS, and DO pins.  Alternatively can specify hardware SPI by sending an
         Adafruit_GPIO.SPI.SpiDev device in the spi parameter.
@@ -42,7 +42,7 @@ class MCP3008(object):
             self._spi = SPI.BitBang(gpio, clk, mosi, miso, cs)
         else:
             raise ValueError('Must specify either spi for for hardware SPI or clk, cs, miso, and mosi for softwrare SPI!')
-        self._spi.set_clock_hz(1000000)
+        self._spi.set_clock_hz(speed_hz)
         self._spi.set_mode(0)
         self._spi.set_bit_order(SPI.MSBFIRST)
 
